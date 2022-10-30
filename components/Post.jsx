@@ -21,7 +21,9 @@ const PostTitle = styled.Text`
   font-size: 16px;
   font-weight: 700;
 `;
+//flex:1 выровнялся текст
 const PostDetails = styled.View`
+  flex: 1;
   justify-content: center;
 `;
 
@@ -31,12 +33,12 @@ color:rgba(0,0,0, 0.4)
 margin-top:2px;
 `;
 
-export const Post = ({title, imageUrl, createdAt}) => {
+export const Post = ({ title, imageUrl, createdAt }) => {
   return (
     <PostView>
       <PostImage
         source={{
-          uri: imageUrl
+          uri: imageUrl,
         }}
       />
       <PostDetails>

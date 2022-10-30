@@ -1,27 +1,44 @@
+import React from 'react';
 import axios from 'axios';
 import { StatusBar } from 'expo-status-bar';
-import {Text, View, Image } from 'react-native';
+import {Text, Alert, View, FlatList, ActivityIndicator } from 'react-native';
 import { Post } from './components/Post';
 
 
 export default function App() {
- //стэйт для статей
- const [items, setItems] = React.useState();
+ const [isLoading, setIsLoading]=React.useState(true);
+ const [items, setItems] = React.useState();//стэйт для статей
 
-ReactIs.useEffect(() => {
-axios.get('https://635c0a0b66f78741d5907e85.mockapi.io/articles')
+
+const fetchPosts=()=>{ //делает запрос
+ setIsLoading(true)//поставь загрузку
+  axios.get('https://635c0a0b66f78741d5907e85.mockapi.io/posts')
 .then(({data})=>{//в момент получения ответа с помощью деструктуриз вытащить data 
 setItems(data);
 }).catch(err=>{//если ошибка оповести пользователя
-  console.log()
+  console.log(err);
+  Alert.alert('Ошибка', 'Не удалось получить статьи');
+}).finally(()=>{
+  setIsLoading(false);//изменения state на false
 });
-}, [])
+}
+
+React.useEffect(fetchPosts,[]);
+
 
   return (
     <View >
-      <Post title='Тест'
-       imageUrl='https://img2.akspic.ru/previews/9/6/8/8/6/168869/168869-oblako-atmosfera-samolety-samolet-derevo-500x.jpg'
-       createdAt='30/10/2022'/>
+    <ActivityIndicator size="large"/>{/*чтобы рендерить загрузку пометила иконку загрузки */}
+<FlatList
+data={items}//массив статей
+renderItem={({item})=> (
+<Post 
+    title={item.title}
+ createdAt={item.createdAt}
+   imageUrl={item.imageUrl}/>
+ )}//рендерю каждую статью
+ />
+ 
       <StatusBar theme= "auto"/>
     </View>
   );
