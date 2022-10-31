@@ -8,6 +8,7 @@ border-radius:30px
 border-bottom-width:1px;
 border-bottom-color:rgba(0,0,0, 0.1)
 border-bottom-style:solid;
+margin-top:15px;
 `;
 
 const PostImage = styled.Image`
