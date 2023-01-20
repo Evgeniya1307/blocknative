@@ -2,13 +2,11 @@ import styled from "styled-components/native";
 
 //родитель и дочерний на однй линии flex-direction: row;
 const PostView = styled.View`
-flex-direction: row;
-padding:15px;
-border-radius:30px
-border-bottom-width:1px;
-border-bottom-color:rgba(0,0,0, 0.1)
-border-bottom-style:solid;
-margin-top:15px;
+  flex-direction: row;
+  padding: 15px;
+  border-bottom-width: 1px;
+  border-bottom-color: rgba(0, 0, 0, 0.1);
+  margin-top: 15px;
 `;
 
 const PostImage = styled.Image`
@@ -34,17 +32,25 @@ color:rgba(0,0,0, 0.4)
 margin-top:2px;
 `;
 
+const truncateTitle = (str) => {
+  if (str.length >= 50) {
+    return str.substring(0, 50) + '...';
+  }
+
+  return str;
+};
+
 export const Post = ({ title, imageUrl, createdAt }) => {
   return (
     <PostView>
       <PostImage
         source={{
-          uri: imageUrl,
+          uri: imageUrl, 
         }}
       />
       <PostDetails>
-        <PostTitle>{title}</PostTitle>
-        <PostDate>{createdAt}</PostDate>
+        <PostTitle>{truncateTitle(title)}</PostTitle>
+        <PostDate>{new Date(createdAt).toLocaleDateString()}</PostDate>
       </PostDetails>
     </PostView>
   );
