@@ -29,13 +29,13 @@ React.useEffect(()=>{
   axios
     .get("https://635c0a0b66f78741d5907e85.mockapi.io/posts/" + id)
     .then(({ data }) => {
-      setData(data);//сохраняю в стейт
+      setData(data);
     })
-    .catch((err) => {//если ошибка показываю
+    .catch((err) => {//if I show an error
       console.log(err);
       Alert.alert("Ошибка", "Не удалось получить статью");
     })
-    .finally(() => {//если нет останавливаю загрузку
+    .finally(() => {//if not stop downloading
       setIsLoading(false);
     });
 }, []);
