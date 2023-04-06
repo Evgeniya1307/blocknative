@@ -4,7 +4,7 @@ import { Text, Alert, View, FlatList, ActivityIndicator,RefreshControl, Touchabl
 import { Post } from "../components/Post";
 
 
-//рендер всех статей
+//render all articles
 export const HomeScreen =({navigation})=> {
   const [isLoading, setIsLoading] = React.useState(true);
   const [items, setItems] = React.useState(); //стэйт для статей
